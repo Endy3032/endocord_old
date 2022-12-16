@@ -2,7 +2,8 @@
 # enmity patch remake by rosie <3333
 
 # global variables used >>>
-IPA_NAME=Discord_157
+VERSION=157
+IPA_NAME=Discord_${VERSION}
 IPA_DIR=Ipas/$IPA_NAME.ipa
 
 ### enmity patching :)
@@ -38,7 +39,7 @@ plutil -remove UISupportedDevices $MAIN_PLIST
 plutil -replace UISupportsDocumentBrowser -bool true $MAIN_PLIST
 plutil -replace UIFileSharingEnabled -bool true $MAIN_PLIST
 
-zip -r dist/GGSans-Font.ipa Payload
+zip -r dist/Enmity_v${VERSION}.ipa Payload
 
 # change the font and remove the payload and ipa
 rm -rf Payload
@@ -54,16 +55,16 @@ wait $!
 # inject all of the patches into the enmity ipa
 for Patch in $(ls Enmity_Patches/Required)
 do
-    Azule/azule -i Dist/GGSans-Font.ipa -o Dist -f Enmity_Patches/Required/${Patch} &
+    Azule/azule -i Dist/Enmity_v${VERSION}.ipa -o Dist -f Enmity_Patches/Required/${Patch} &
     wait $!
-    mv Dist/GGSans-Font+${Patch}.ipa Dist/GGSans-Font.ipa
+    mv Dist/Enmity_v${VERSION}+${Patch}.ipa Dist/Enmity_v${VERSION}.ipa
 done
 
 # create a new ipa with each pack injected from the base ipa
 for Pack in $(ls Packs)
 do
-    unzip Dist/GGSans-Font.ipa
+    unzip Dist/Enmity_v${VERSION}.ipa
     cp -rf Packs/${Pack}/* Payload/Discord.app/assets/
-    zip -r Dist/GGSans-Font+${Pack}_Icons.ipa Payload
+    zip -r Dist/Enmity_v${VERSION}+${Pack}_Icons.ipa Payload
     rm -rf Payload
 done

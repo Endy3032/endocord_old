@@ -45,7 +45,6 @@ zip -r dist/Enmity_v${VERSION}.ipa Payload
 rm -rf Payload
 
 # go back to main dir
-cd ..
 [[ -e "Enmity_Patches/$PATCH_NAME.deb" ]] && echo "[*] '$PATCH_NAME.deb' has been built successfully." || echo "[*] Error when building '$PATCH_NAME.deb'. Continuing anyway."
 
 # patch the ipa with the dylib tweak (using azule)

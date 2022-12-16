@@ -64,6 +64,6 @@ for Pack in $(ls Packs)
 do
     unzip Dist/Enmity_v${VERSION}.ipa
     cp -rf Packs/${Pack}/* Payload/Discord.app/assets/
-    zip -r Dist/Enmity_v${VERSION}+${Pack}_Icons.ipa Payload
+    zip -r Dist/Enmity_v${VERSION}_${Pack}.ipa Payload
     rm -rf Payload
 done

@@ -12,8 +12,7 @@ jobs:
 
       - name: Grab Discord IPA
         run: |
-          mkdir -p IPA
-          curl -o $IPA_DIR https://cdn.discordapp.com/attachments/1011346757214543875/1062287485025132604/Discord_161.0.ipa &
+          curl --create-dirs -O --output-dir IPA "https://cdn.discordapp.com/attachments/1011346757214543875/1062287485025132604/Discord_161.0.ipa" &
           wait $!
         id: fetch_ipa
 

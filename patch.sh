@@ -1,69 +1,66 @@
 #!/bin/bash
-# enmity patch remake by rosie <3333
 
-# global variables used >>>
-VERSION=157
-IPA_NAME=Discord_${VERSION}
-IPA_DIR=Ipas/$IPA_NAME.ipa
+# Global variablse
+VERSION=161.0
+IPA_DIR=IPA/Discord_$VERSION.ipa
+PLIST=Payload/Discord.app/Info.plist
 
-### enmity patching :)
-## output directory of patched ipa
+#-------------#
+# Preparation #
+#-------------#
+
+# Build output
 mkdir -p Dist/
 rm -rf Dist/*
-
-
-# remove payload incase it exists
 rm -rf Payload
 
 echo "[*] Directory of IPA: $IPA_DIR"
 
+# Wait for Discord IPA to download
+[[ -f "$IPA_DIR" ]] && echo "[*] IPA already exists" || curl -o $IPA_DIR https://cdn.discordapp.com/attachments/1011346757214543875/1062287485025132604/Discord_161.0.ipa &
+wait $!
 
-## unzip the ipa and wait for it to finish unzipping
+# Wait for IPA to unzip
 unzip $IPA_DIR &
 wait $!
 
-# set the main path to the payload plist in a variable for ease of use
-MAIN_PLIST=Payload/Discord.app/Info.plist
+#--------------#
+# Modification #
+#--------------#
 
-# patch discord's name
-plutil -replace CFBundleName -string "Enmity" $MAIN_PLIST
-plutil -replace CFBundleDisplayName -string "Enmity" $MAIN_PLIST
+# App name
+plutil -replace CFBundleName -string "Enmity" $PLIST
+plutil -replace CFBundleDisplayName -string "Enmity" $PLIST
 
-# patch discord's url scheme to add enmity's url handler
-plutil -insert CFBundleURLTypes.1 -xml "<dict><key>CFBundleURLName</key><string>Enmity</string><key>CFBundleURLSchemes</key><array><string>enmity</string></array></dict>" $MAIN_PLIST
+# Add Enmity URL scheme
+plutil -insert CFBundleURLTypes.1 -xml "<dict><key>CFBundleURLName</key><string>Enmity</string><key>CFBundleURLSchemes</key><array><string>enmity</string></array></dict>" $PLIST
 
-# remove discord's device limits
-plutil -remove UISupportedDevices $MAIN_PLIST
+# Remove device limits
+plutil -remove UISupportedDevices $PLIST
 
-# patch itunes and files
-plutil -replace UISupportsDocumentBrowser -bool true $MAIN_PLIST
-plutil -replace UIFileSharingEnabled -bool true $MAIN_PLIST
+# Enable iTunes file sharing
+plutil -replace UISupportsDocumentBrowser -bool true $PLIST
+plutil -replace UIFileSharingEnabled -bool true $PLIST
 
+# Replace Icons
+cp -rf Plumpy/* Payload/Discord.app/assets/
+
+# Package
 zip -r dist/Enmity_v${VERSION}.ipa Payload
-
-# change the font and remove the payload and ipa
 rm -rf Payload
 
-# go back to main dir
-[[ -e "Enmity_Patches/$PATCH_NAME.deb" ]] && echo "[*] '$PATCH_NAME.deb' has been built successfully." || echo "[*] Error when building '$PATCH_NAME.deb'. Continuing anyway."
+#-------#
+# Patch #
+#-------#
 
-# patch the ipa with the dylib tweak (using azule)
+# Get Azule
 [[ -d "Azule" ]] && echo "[*] Azule already exists" || git clone https://github.com/Al4ise/Azule &
 wait $!
 
-# inject all of the patches into the enmity ipa
-for Patch in $(ls Enmity_Patches/Required)
+# Inject patches into Enmity
+for Patch in $(ls Patches)
 do
-    Azule/azule -i Dist/Enmity_v${VERSION}.ipa -o Dist -f Enmity_Patches/Required/${Patch} &
+    Azule/azule -i Dist/Enmity_v${VERSION}.ipa -f Patches/${Patch} -o Dist &
     wait $!
     mv Dist/Enmity_v${VERSION}+${Patch}.ipa Dist/Enmity_v${VERSION}.ipa
-done
-
-# create a new ipa with each pack injected from the base ipa
-for Pack in $(ls Packs)
-do
-    unzip Dist/Enmity_v${VERSION}.ipa
-    cp -rf Packs/${Pack}/* Payload/Discord.app/assets/
-    zip -r Dist/Enmity_v${VERSION}_${Pack}.ipa Payload
-    rm -rf Payload
 done

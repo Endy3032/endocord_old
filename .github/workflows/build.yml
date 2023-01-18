@@ -1,30 +1,30 @@
-name: Build Enmity and Inject Rosiecord
+name: Build Enmity with Patches
 on:
   push:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build Enmity and Inject Rosiecord
+    name: Build Enmity with Patches
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
 
       - name: Retrieve version
         run: |
-          cd ./ipas
-          echo "::set-output name=DISCORD_VERSION::$(ls | grep Discord | sed -e s/[^0-9.]//g | sed -e s/[/.+?\./]//g)"   
+          cd ./IPA
+          echo "name=DISCORD_VERSION::$(ls | grep Discord | sed -e s/[^0-9.]//g | sed -e s/[/.+?\./]//g)" >> $GITHUB_OUTPUT
         id: version
 
       - name: Run Main Shell Script
         id: shell_script
         run: sh ./patch.sh
-        
+
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: rosiecord_v${{ steps.version.outputs.DISCORD_VERSION }}
-          title: Rosiecord v${{ steps.version.outputs.DISCORD_VERSION }}
+          automatic_release_tag: endocord_v${{ steps.version.outputs.DISCORD_VERSION }}
+          title: Endocord v${{ steps.version.outputs.DISCORD_VERSION }}
           files: dist/*.ipa

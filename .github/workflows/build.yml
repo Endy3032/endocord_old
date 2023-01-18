@@ -10,9 +10,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Grab Discord IPA
+        run: |
+          mkdir -p IPA
+          curl -o $IPA_DIR https://cdn.discordapp.com/attachments/1011346757214543875/1062287485025132604/Discord_161.0.ipa &
+          wait $!
+        id: fetch_ipa
+
+      - name: Retrieve version
+        run: |
+          cd ./IPA
+          echo "name=DISCORD_VERSION::$(ls | grep Discord | sed -e s/[^0-9.]//g | sed -e s/[/.+?\./]//g)" >> $GITHUB_OUTPUT
+        id: version
+
       - name: Run Main Shell Script
-        id: shell_script
         run: sh ./patch.sh
+        id: shell_script
 
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest

@@ -10,10 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Test
-        run: echo "name=DISCORD_VERSION::$(ls)" >> $GITHUB_OUTPUT
-        id: version
-
       - name: Run Main Shell Script
         id: shell_script
         run: sh ./patch.sh

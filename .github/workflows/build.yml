@@ -19,7 +19,7 @@ jobs:
       - name: Retrieve version
         run: |
           cd ./IPA
-          echo "name=DISCORD_VERSION::$(ls | grep Discord | sed -e s/[^0-9.]//g | sed -e s/[/.+?\./]//g)" >> $GITHUB_OUTPUT
+          echo "DISCORD_VERSION=$(ls | grep Discord | sed -e s/[^0-9.]//g | sed -e s/[/.+?\./]//g)" >> $GITHUB_OUTPUT
         id: version
 
       - name: Run Main Shell Script

@@ -4,10 +4,15 @@
 VERSION=161.0
 IPA_DIR=IPA/Discord_$VERSION.ipa
 PLIST=Payload/Discord.app/Info.plist
+IPA_LINK=https://cdn.discordapp.com/attachments/1011346757214543875/1067133673117335792/Discord_163.ipa
 
 #-------------#
 # Preparation #
 #-------------#
+
+# Fetch Discord IPA
+curl --create-dirs -O --output-dir IPA "$IPA_LINK" &
+wait $!
 
 # Build output
 mkdir -p Dist/

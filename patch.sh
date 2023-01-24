@@ -13,23 +13,17 @@ PLIST=Payload/Discord.app/Info.plist
 # Preparation #
 #-------------#
 
-# Fetch Discord IPA
+# Wait for Discord IPA to download
 curl --create-dirs -O --output-dir IPA "https://cdn.discordapp.com/attachments/$DISCORD_IDS/$IPA_NAME" &
 wait $!
 
-# Build output
+# Clean up
 mkdir -p Dist/
 rm -rf Dist/*
 rm -rf Payload
 
-echo "[*] Directory of IPA: $IPA_DIR"
-
-# Wait for Discord IPA to download
-[[ -f "$IPA_DIR" ]] && echo "[*] IPA already exists" || curl -o $IPA_DIR https://cdn.discordapp.com/attachments/1011346757214543875/1062287485025132604/Discord_161.0.ipa &
-wait $!
-
 # Wait for IPA to unzip
-unzip -q $IPA_DIR &
+unzip -qq $IPA_DIR &
 wait $!
 
 #--------------#

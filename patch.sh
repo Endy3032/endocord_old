@@ -29,7 +29,7 @@ echo "[*] Directory of IPA: $IPA_DIR"
 wait $!
 
 # Wait for IPA to unzip
-unzip $IPA_DIR &
+unzip -q $IPA_DIR &
 wait $!
 
 #--------------#

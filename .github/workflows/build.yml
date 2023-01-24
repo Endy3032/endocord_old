@@ -15,7 +15,7 @@ jobs:
         id: build
 
       - name: Get app version
-        run: echo "VERSION=$(ls ./IPA | grep -Ei '(?<=Discord_)\d+')" >> $GITHUB_OUTPUT
+        run: echo "VERSION=$(ls ./IPA)" >> $GITHUB_OUTPUT
         id: version
 
       - name: Create release
@@ -23,6 +23,6 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: endocord_v${{ steps.version.outputs.VERSION }}
-          title: Endocord v${{ steps.version.outputs.VERSION }}
+          automatic_release_tag: Enmity + ${{ steps.version.outputs.VERSION }}
+          title: Enmity + ${{ steps.version.outputs.VERSION }}
           files: dist/*.ipa

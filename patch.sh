@@ -23,7 +23,7 @@ rm -rf Dist/*
 rm -rf Payload
 
 # Wait for IPA to unzip
-unzip -qq $IPA_DIR &
+unzip -qq $IPA_DIR > /dev/null &
 wait $!
 
 #--------------#

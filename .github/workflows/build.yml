@@ -10,27 +10,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Grab Discord IPA
-        run: |
-          curl --create-dirs -O --output-dir IPA "https://cdn.discordapp.com/attachments/1011346757214543875/1062287485025132604/Discord_161.0.ipa" &
-          wait $!
-        id: fetch_ipa
-
-      - name: Retrieve version
-        run: |
-          cd ./IPA
-          echo "DISCORD_VERSION=$(ls | grep Discord | sed -e s/[^0-9.]//g | sed -e s/[/.+?\./]//g)" >> $GITHUB_OUTPUT
-        id: version
-
       - name: Run Main Shell Script
         run: sh ./patch.sh
-        id: shell_script
+        id: build
+
+      - name: Get app version
+        run: echo "VERSION=$(ls ./IPA | grep -Ei '(?<=Discord_)\d+')" >> $GITHUB_OUTPUT
+        id: version
 
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: endocord_v${{ steps.version.outputs.DISCORD_VERSION }}
-          title: Endocord v${{ steps.version.outputs.DISCORD_VERSION }}
+          automatic_release_tag: endocord_v${{ steps.version.outputs.VERSION }}
+          title: Endocord v${{ steps.version.outputs.VERSION }}
           files: dist/*.ipa

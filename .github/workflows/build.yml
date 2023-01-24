@@ -23,6 +23,6 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: Enmity + ${{ steps.version.outputs.VERSION }}
+          automatic_release_tag: Enmity_${{ steps.version.outputs.VERSION }}
           title: Enmity + ${{ steps.version.outputs.VERSION }}
           files: dist/*.ipa

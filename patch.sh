@@ -48,7 +48,6 @@ plutil -replace UIFileSharingEnabled -bool true $PLIST
 cp -rf Plumpy/* Payload/Discord.app/assets/
 
 # Package
-chmod +x Payload/Discord.app/Discord
 zip -r dist/Enmity_v${VERSION}.ipa Payload
 rm -rf Payload
 

@@ -1,0 +1,7 @@
+.DS_Store
+Dist/*
+Azule
+test.sh
+semver2.sh
+Flowercord_Patcher/.theos
+Flowercord_Patcher/.vscode

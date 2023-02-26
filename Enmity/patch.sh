@@ -45,7 +45,7 @@ plutil -replace UISupportsDocumentBrowser -bool true $PLIST
 plutil -replace UIFileSharingEnabled -bool true $PLIST
 
 # Replace Icons
-cp -rf Plumpy/* Payload/Discord.app/assets/
+cp -rf Icons/* Payload/Discord.app/assets/
 
 # Package
 zip -r dist/Enmity_v${VERSION}.ipa Payload
@@ -59,10 +59,10 @@ rm -rf Payload
 [[ -d "Azule" ]] && echo "[*] Azule already exists" || git clone https://github.com/Al4ise/Azule &
 wait $!
 
-# Inject patches into Enmity
-for Patch in $(ls Patches)
+# Inject tweaks
+for Patch in $(ls Debs)
 do
-    Azule/azule -i Dist/Enmity_v${VERSION}.ipa -f Patches/${Patch} -o Dist &
+    Azule/azule -i Dist/Enmity_v${VERSION}.ipa -f Debs/${Patch} -o Dist &
     wait $!
     mv Dist/Enmity_v${VERSION}+${Patch}.ipa Dist/Enmity_v${VERSION}.ipa
 done

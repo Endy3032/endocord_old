@@ -3,6 +3,9 @@
 # Global variablse
 pwd
 ls
+chdir Enmity
+pwd
+ls
 VERSION=174.0_42188
 IPA_NAME=Discord_$VERSION.ipa
 DISCORD_IDS=1085420899907412028/1092882978117517373

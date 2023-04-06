@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Global variablse
 pwd
@@ -20,7 +20,7 @@ PLIST=Payload/Discord.app/Info.plist
 #-------------#
 
 # Wait for Discord IPA to download
-# curl --create-dirs -O --output-dir IPA "https://cdn.discordapp.com/attachments/${DISCORD_IDS}/${IPA_NAME}"
+curl --create-dirs -O --output-dir IPA "https://cdn.discordapp.com/attachments/${DISCORD_IDS}/${IPA_NAME}"
 
 # Clean up
 mkdir -p Dist

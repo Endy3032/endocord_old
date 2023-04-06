@@ -21,7 +21,7 @@ jobs:
         id: build
 
       - name: Get app version
-        run: echo "VERSION=$(ls ./IPA)" >> $GITHUB_OUTPUT
+        run: echo "VERSION=$(ls ./Enmity/IPA)" >> $GITHUB_OUTPUT
         id: version
 
       - name: Create release
@@ -31,4 +31,4 @@ jobs:
           prerelease: false
           automatic_release_tag: Enmity_${{ steps.version.outputs.VERSION }}
           title: Enmity + ${{ steps.version.outputs.VERSION }}
-          files: dist/*.ipa
+          files: ./Enmity/Dist/*.ipa

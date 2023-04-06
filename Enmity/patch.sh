@@ -1,17 +1,13 @@
 #!/bin/zsh
 
 # Global variablse
-pwd
-ls
 chdir Enmity
-pwd
-ls
 VERSION=174.0_42188
 IPA_NAME=Discord_$VERSION.ipa
 DISCORD_IDS=1085420899907412028/1092882978117517373
 ENMITY_DEB=$(ls Debs | grep En)
-K2G_DEB=$(ls Debs | grep -i K2)
-SCROLL_DEB=$(ls Debs | grep -i scroll)
+K2G_DEB=$(ls Debs | grep K2)
+SCROLL_DEB=$(ls Debs | grep scroll)
 
 PLIST=Payload/Discord.app/Info.plist
 

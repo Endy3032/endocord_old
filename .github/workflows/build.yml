@@ -17,7 +17,7 @@ jobs:
         run: brew install coreutils
 
       - name: Run Main Shell Script
-        run: ./Enmity/patch.sh
+        run: chdir Enmity & ./patch.sh
         id: build
 
       - name: Get app version

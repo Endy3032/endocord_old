@@ -1,9 +1,9 @@
 name: Patch Enmity
 on:
+  workflow_dispatch:
   push:
     paths:
       - "Enmity/**/*"
-  workflow_dispatch
 
 jobs:
   build:

@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Global variablse
+pwd
+ls
+cd Enmity
 VERSION=174.0_42188
 IPA_NAME=Discord_$VERSION.ipa
 DISCORD_IDS=1085420899907412028/1092882978117517373

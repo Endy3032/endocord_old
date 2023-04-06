@@ -11,16 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Move to Enmity folder
-        id: cd
-        run: cd Enmity
-
       - name: Install coreutils
         id: coreutils
         run: brew install coreutils
 
       - name: Run Main Shell Script
-        run: sh ./patch.sh
+        run: cd Enmity; ./patch.sh
         id: build
 
       - name: Get app version

@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - "Enmity/**/*"
+  workflow_dispatch
 
 jobs:
   build:

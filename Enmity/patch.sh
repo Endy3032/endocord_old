@@ -59,8 +59,8 @@ rm -rf Payload
 [[ -d "Azule" ]] && echo "[*] Azule already exists" || git clone https://github.com/Al4ise/Azule
 
 # Inject tweaks
-Azule/azule -i "Dist/Enmity_v${VERSION}.ipa" -f "${PWD}/Debs/${ENMITY_DEB}" "${PWD}/Debs/${SCROLL_DEB}" -e -o "Dist"
+Azule/azule -i "Dist/Enmity_v${VERSION}.ipa" -f "${PWD}/Debs/${ENMITY_DEB}" "${PWD}/Debs/${SCROLL_DEB}" -o "Dist"
 mv "Dist/Enmity_v${VERSION}+${ENMITY_DEB}+${SCROLL_DEB}.ipa" "Dist/Enmity_v${VERSION}.ipa"
 
-Azule/azule -i "Dist/Enmity_v${VERSION}.ipa" -f "${PWD}/Debs/${K2G_DEB}" -e -o "Dist"
+Azule/azule -i "Dist/Enmity_v${VERSION}.ipa" -f "${PWD}/Debs/${K2G_DEB}" -o "Dist"
 mv "Dist/Enmity_v${VERSION}+${K2G_DEB}.ipa" "Dist/Enmity_v${VERSION}_K2G.ipa"

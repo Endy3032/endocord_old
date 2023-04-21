@@ -3,9 +3,9 @@
 chdir Enmity
 
 # Global variablse
-VERSION=174.0_42188
+VERSION=176.0_42856
 BASE_IPA_NAME=Discord_$VERSION.ipa
-DISCORD_IDS=1085420899907412028/1092882978117517373
+DISCORD_IDS=1011346757214543875/1098351802514145451
 IPA_LINK=https://cdn.discordapp.com/attachments/${DISCORD_IDS}/${BASE_IPA_NAME}
 
 ENMITY_IPA_NAME=Enmity_v${VERSION}
@@ -66,6 +66,10 @@ plutil -replace UIFileSharingEnabled -bool true ${PLIST}
 cp -rf Icons/* Payload/Discord.app/assets/
 
 # Package
+print "Signing..."
+ldid -S Payload/Discord.app/Discord
+for DEB in Payload/Discord.app/Frameworks/*.dylib; ldid -S ${DEB}
+
 print "Packaging Enmity..."
 zip -qr Dist/${ENMITY_IPA_NAME}.ipa Payload
 

@@ -31,6 +31,10 @@ function print() {
 # Preparation #
 #-------------#
 
+brew install coreutils
+
+where ldid
+
 # Wait for Discord IPA to download
 if [[ -e "IPA/${IPA_NAME}" ]] then print "IPA already exists"
 else

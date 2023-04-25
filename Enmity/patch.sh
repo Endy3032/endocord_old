@@ -8,8 +8,8 @@ chdir Enmity
 
 VERSION=177.0
 BUILD=43017
-DISCORD_CHANNEL_ID=1011346757214543875
-DISCORD_MESSAGE_ID=1099119312733745263
+DISCORD_CHANNEL_ID=1085420899907412028
+DISCORD_MESSAGE_ID=1099987092282552322
 
 IPA_NAME=Discord_${VERSION}_${BUILD}.ipa
 IPA_LINK=https://cdn.discordapp.com/attachments/${DISCORD_CHANNEL_ID}/${DISCORD_MESSAGE_ID}/${IPA_NAME}
@@ -30,10 +30,6 @@ function print() {
 #-------------#
 # Preparation #
 #-------------#
-
-brew install coreutils
-
-where ldid
 
 # Wait for Discord IPA to download
 if [[ -e "IPA/${IPA_NAME}" ]] then print "IPA already exists"

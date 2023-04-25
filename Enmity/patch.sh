@@ -2,17 +2,23 @@
 
 chdir Enmity
 
-# Global variablse
-VERSION=176.0_42856
-BASE_IPA_NAME=Discord_$VERSION.ipa
-DISCORD_IDS=1011346757214543875/1098351802514145451
-IPA_LINK=https://cdn.discordapp.com/attachments/${DISCORD_IDS}/${BASE_IPA_NAME}
+#-------------#
+# Global Vars #
+#-------------#
+
+VERSION=177.0
+BUILD=43017
+DISCORD_CHANNEL_ID=1011346757214543875
+DISCORD_MESSAGE_ID=1099119312733745263
+
+IPA_NAME=Discord_${VERSION}_${BUILD}.ipa
+IPA_LINK=https://cdn.discordapp.com/attachments/${DISCORD_CHANNEL_ID}/${DISCORD_MESSAGE_ID}/${IPA_NAME}
 
 ENMITY_IPA_NAME=Enmity_v${VERSION}
 K2GENMITY_IPA_NAME=K2GEnmity_v${VERSION}
 
-ENMITY_DEB=$(ls Debs | grep En)
-K2G_DEB=$(ls Debs | grep K2)
+K2G_DEB=$(ls Debs | grep K2G)
+ENMITY_DEB=$(ls Debs | grep Enmity)
 SCROLL_DEB=$(ls Debs | grep scroll)
 
 PLIST=Payload/Discord.app/Info.plist
@@ -26,7 +32,7 @@ function print() {
 #-------------#
 
 # Wait for Discord IPA to download
-if [[ -e "IPA/${BASE_IPA_NAME}" ]] then print "IPA already exists"
+if [[ -e "IPA/${IPA_NAME}" ]] then print "IPA already exists"
 else
 	print "Fetching IPA"
 	curl -O --output-dir IPA --create-dirs ${IPA_LINK}
@@ -40,7 +46,7 @@ rm -rf Payload
 
 # Wait for IPA to unzip
 print "Unzipping..."
-unzip -qq IPA/${BASE_IPA_NAME} & wait $!
+unzip -qq IPA/${IPA_NAME} & wait $!
 
 #--------------#
 # Modification #

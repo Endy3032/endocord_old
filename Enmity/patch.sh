@@ -18,7 +18,7 @@ IPA_LINK=https://cdn.discordapp.com/attachments/${DISCORD_CHANNEL_ID}/${DISCORD_
 ENMITY_IPA_NAME=Enmity_v${FULL_VER}
 K2GENMITY_IPA_NAME=K2GEnmity_v${FULL_VER}
 
-K2G_DEB=$(ls Debs | grep K2G)
+K2G_DEB=$(ls Debs | grep K2)
 ENMITY_DEB=$(ls Debs | grep Enmity)
 SCROLL_DEB=$(ls Debs | grep scroll)
 

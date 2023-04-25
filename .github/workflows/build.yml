@@ -12,10 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install coreutils and ldid
-        id: coreutils
-        run: brew install coreutils ldid
-
       - name: Run Main Shell Script
         run: ./Enmity/patch.sh
         id: build

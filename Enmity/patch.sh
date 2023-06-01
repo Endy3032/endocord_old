@@ -6,11 +6,11 @@ chdir Enmity
 # Global Vars #
 #-------------#
 
-VERSION=178.0
-BUILD=43611
+VERSION=181.0
+BUILD=44565
 FULL_VER=${VERSION}_${BUILD}
 DISCORD_CHANNEL_ID=1015971724895989780
-DISCORD_MESSAGE_ID=1103441324729978930
+DISCORD_MESSAGE_ID=1111673751998840904
 
 IPA_NAME=Discord_${FULL_VER}.ipa
 IPA_LINK=https://cdn.discordapp.com/attachments/${DISCORD_CHANNEL_ID}/${DISCORD_MESSAGE_ID}/${IPA_NAME}
@@ -70,6 +70,7 @@ plutil -replace UISupportsDocumentBrowser -bool true ${PLIST}
 plutil -replace UIFileSharingEnabled -bool true ${PLIST}
 
 # Replace Icons
+cp -rf Icons/Assets.car Payload/Discord.app/
 cp -rf Icons/* Payload/Discord.app/assets/
 
 # Package

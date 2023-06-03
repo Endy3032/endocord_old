@@ -70,7 +70,6 @@ plutil -replace UISupportsDocumentBrowser -bool true ${PLIST}
 plutil -replace UIFileSharingEnabled -bool true ${PLIST}
 
 # Replace Icons
-cp -rf Icons/Assets.car Payload/Discord.app/
 cp -rf Icons/* Payload/Discord.app/assets/
 
 # Package

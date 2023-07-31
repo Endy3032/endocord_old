@@ -6,9 +6,9 @@ chdir Enmity
 # Global Vars #
 #-------------#
 
-VERSION="186.0_46367"
-IPA_NAME=Discord_${VERSION}.ipa
-IPA_LINK=https://cdn.discordapp.com/attachments/1015971724895989780/1126409555711107072/${IPA_NAME}
+VERSION="190.0_47131"
+IPA_NAME="Discord_${VERSION}.ipa"
+IPA_LINK="https://cdn.discordapp.com/attachments/1015971724895989780/1135321133143572611/${IPA_NAME}"
 
 ENMITY_IPA_NAME=Enmity_v${VERSION}
 K2GENMITY_IPA_NAME=K2GEnmity_v${VERSION}

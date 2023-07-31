@@ -11,11 +11,12 @@ IPA_NAME="Discord_${VERSION}.ipa"
 IPA_LINK="https://cdn.discordapp.com/attachments/1015971724895989780/1135321133143572611/${IPA_NAME}"
 
 ENMITY_IPA_NAME=Enmity_v${VERSION}
-K2GENMITY_IPA_NAME=K2GEnmity_v${VERSION}
+# K2GENMITY_IPA_NAME=K2GEnmity_v${VERSION}
 
-K2G_DEB=$(ls Debs | grep K2)
+# K2G_DEB=$(ls Debs | grep K2)
 ENMITY_DEB=$(ls Debs | grep Enmity)
 SCROLL_DEB=$(ls Debs | grep scroll)
+SLDFIX_DEB=$(ls Debs | grep Sideload)
 
 PLIST=Payload/Discord.app/Info.plist
 
@@ -71,9 +72,9 @@ cp -rf Icons/* Payload/Discord.app/assets/
 print "Packaging Enmity..."
 zip -qr Dist/${ENMITY_IPA_NAME}.ipa Payload
 
-print "Packaging K2GEnmity..."
-plutil -replace NSFaceIDUsageDescription -string "K2genmity" ${PLIST}
-zip -qr Dist/${K2GENMITY_IPA_NAME}.ipa Payload
+# print "Packaging K2GEnmity..."
+# plutil -replace NSFaceIDUsageDescription -string "K2genmity" ${PLIST}
+# zip -qr Dist/${K2GENMITY_IPA_NAME}.ipa Payload
 
 rm -rf Payload
 
@@ -92,11 +93,11 @@ fi
 for IPA in Dist/*.ipa
 do
 	print "Injecting tweaks into ${IPA}"
-	Azule/azule -i ${IPA} -f ${PWD}/Debs/${ENMITY_DEB} ${PWD}/Debs/${SCROLL_DEB} -o Dist
-	mv $(echo ${IPA} | sed s/\.ipa//)+${ENMITY_DEB}+${SCROLL_DEB}.ipa ${IPA}
+	Azule/azule -i ${IPA} -f ${PWD}/Debs/${ENMITY_DEB} ${PWD}/Debs/${SCROLL_DEB} ${PWD}/Debs/${SLDFIX_DEB} -o Dist
+	mv $(echo ${IPA} | sed s/\.ipa//)+${ENMITY_DEB}+${SCROLL_DEB}+${SLDFIX_DEB}.ipa ${IPA}
 done
 
 # Inject K2G
-print "Injecting K2G"
-Azule/azule -i Dist/${K2GENMITY_IPA_NAME}.ipa -f ${PWD}/Debs/${K2G_DEB} -o Dist
-mv Dist/${K2GENMITY_IPA_NAME}+${K2G_DEB}.ipa Dist/${K2GENMITY_IPA_NAME}.ipa
+# print "Injecting K2G"
+# Azule/azule -i Dist/${K2GENMITY_IPA_NAME}.ipa -f ${PWD}/Debs/${K2G_DEB} -o Dist
+# mv Dist/${K2GENMITY_IPA_NAME}+${K2G_DEB}.ipa Dist/${K2GENMITY_IPA_NAME}.ipa

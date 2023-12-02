@@ -6,7 +6,7 @@ chdir Enmity
 # Global Vars #
 #-------------#
 
-VERSION="204.0_51761"
+VERSION="207.0_52588"
 IPA_NAME="Discord_${VERSION}.ipa"
 IPA_LINK="https://ipa.aspy.dev/discord/testflight/${IPA_NAME}"
 
